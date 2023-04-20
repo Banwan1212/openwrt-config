@@ -36,7 +36,7 @@ jobs:
           cd openwrt         
           ./scripts/feeds update -a                              
           ./scripts/feeds install -a
-          
+      # make menuconfig
       - name: Start SSH via tmate
         uses: rdp-studio/ssh2actions@main
         if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
