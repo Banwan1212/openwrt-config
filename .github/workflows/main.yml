@@ -1,4 +1,4 @@
-name: OpenWrt-lede-64-x86
+name: OpenWrt
 on:
   repository_dispatch:
   workflow_dispatch:
