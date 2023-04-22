@@ -28,12 +28,14 @@ jobs:
       - name: Clone source code
 
         run: |
-          # git clone https://github.com/coolsnowwolf/lede
           git clone https://github.com/openwrt/openwrt
-
       - name: Update feeds
         run: |
-          cd openwrt         
+          cd openwrt  
+          cat >> feeds.conf.default <<EOF 
+          src-git kenzo https://github.com/kenzok8/openwrt-packages
+          src-git small https://github.com/kenzok8/small
+          EOF
           ./scripts/feeds update -a                              
           ./scripts/feeds install -a
       # make menuconfig
