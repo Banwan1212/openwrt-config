@@ -1,4 +1,4 @@
-name: OpenWrt
+name: OpenWrt-config
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -38,7 +38,9 @@ jobs:
           EOF
           ./scripts/feeds update -a                              
           ./scripts/feeds install -a
-      # make menuconfig
+          rm -rf ./tmp && rm -rf .config
+          wget https://github.com/Banwan1212/openwrt-config/raw/main/.config
+          
       - name: Start SSH via tmate
         uses: rdp-studio/ssh2actions@main
         if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
