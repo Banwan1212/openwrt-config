@@ -7,6 +7,10 @@ on:
         description: 'SSH connection to Actions'
         required: false
         default: 'true/false'
+      wget:
+        description: 'config'
+        required: false
+        default: 'true/false'
 jobs:
   build_openwrt:
     name: Build OpenWrt firmware
