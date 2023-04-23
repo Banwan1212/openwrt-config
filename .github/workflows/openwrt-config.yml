@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       ssh:
-        description: 'SSH connection to Actions'
-        required: false
-        default: 'true/false'
+        description: 'SSH connection to Actions true/false'
+        required: true
+        default: ''
       wget:
-        description: 'config'
-        required: false
-        default: 'true/false'
+        description: 'config true/false'
+        required: true
+        default: ''
 jobs:
   build_openwrt:
     name: Build OpenWrt firmware
@@ -43,6 +43,7 @@ jobs:
           ./scripts/feeds update -a                              
           ./scripts/feeds install -a
           rm -rf ./tmp && rm -rf .config
+          if: (github.event.inputs.wget == 'true')
           wget https://github.com/Banwan1212/openwrt-config/raw/main/.config
           
       - name: Start SSH via tmate
