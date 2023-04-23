@@ -44,7 +44,8 @@ jobs:
           ./scripts/feeds install -a
           rm -rf ./tmp && rm -rf .config
           if: (github.event.inputs.wget == 'true')
-          wget https://github.com/Banwan1212/openwrt-config/raw/main/.config
+          env:
+           wget https://github.com/Banwan1212/openwrt-config/raw/main/.config
           
       - name: Start SSH via tmate
         uses: rdp-studio/ssh2actions@main
