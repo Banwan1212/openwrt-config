@@ -43,7 +43,7 @@ jobs:
           ./scripts/feeds update -a                              
           ./scripts/feeds install -a
           rm -rf ./tmp && rm -rf .config
-      - name: wget .config
+      - name: wget config
         if: (github.event.inputs.w_get == 'true' && github.event.inputs.w_get  != 'false') || contains(github.event.action, 'w_get')
           cd openwrt
           wget https://github.com/Banwan1212/openwrt-config/raw/main/.config
