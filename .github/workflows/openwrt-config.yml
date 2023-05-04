@@ -8,7 +8,7 @@ on:
         required: true
         default: ''
       wget:
-        description: 'config true/false'
+        description: 'wget config true/false'
         required: true
         default: ''
 jobs:
@@ -43,6 +43,8 @@ jobs:
           ./scripts/feeds update -a                              
           ./scripts/feeds install -a
           rm -rf ./tmp && rm -rf .config
+      - name: wget .config
+          cd openwrt
           wget https://github.com/Banwan1212/openwrt-config/raw/main/.config
           
       - name: Start SSH via tmate
