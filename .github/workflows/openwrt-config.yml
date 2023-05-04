@@ -7,7 +7,7 @@ on:
         description: 'SSH connection to Actions true/false'
         required: true
         default: ''
-      wget:
+      w_get:
         description: 'wget config true/false'
         required: true
         default: ''
@@ -44,7 +44,7 @@ jobs:
           ./scripts/feeds install -a
           rm -rf ./tmp && rm -rf .config
       - name: wget .config
-        if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+        if: (github.event.inputs.w_get == 'true' && github.event.inputs.w_get  != 'false') || contains(github.event.action, 'w_get')
           cd openwrt
           wget https://github.com/Banwan1212/openwrt-config/raw/main/.config
           
