@@ -26,7 +26,8 @@ jobs:
 
       - name: Clone source code
         run: |
-          git clone https://github.com/openwrt/openwrt -b v22.03.5 openwrt
+          # git clone https://github.com/openwrt/openwrt -b v22.03.5 openwrt
+          git clone https://github.com/openwrt/openwrt/tree/openwrt-22.03 openwrt
       - name: Update feeds
         run: |
           cd openwrt
