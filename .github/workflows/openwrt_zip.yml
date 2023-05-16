@@ -1,6 +1,6 @@
 # v22.03.5 openwrt
 
-name: v22.03.5 openwrt
+name: v22.03.5 openwrt_zip
 on:
   repository_dispatch:
   workflow_dispatch:
