@@ -47,7 +47,7 @@ jobs:
         run: |
           cd openwrt
           rm -rf ./tmp && rm -rf .config
-          wget https://github.com/Banwan1212/openwrt-config/raw/main/openwrt.config -O .config
+          wget https://github.com/Banwan1212/openwrt-config/raw/main/openwrt_zip.config -O .config
           make defconfig
       - name: up config
         uses: actions/upload-artifact@v3
