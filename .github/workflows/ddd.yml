@@ -75,7 +75,27 @@ jobs:
           CONFIG_TARGET_IMAGES_GZIP=y
           CONFIG_TARGET_ROOTFS_TARGZ=y
           CONFIG_TARGET_ROOTFS_PARTSIZE=1024
-         
+          
+          CONFIG_LUCI_LANG_zh_Hans=y
+          CONFIG_PACKAGE_luci-mod-admin-full=y
+          CONFIG_PACKAGE_luci-app-opkg=y
+          CONFIG_PACKAGE_luci-i18n-opkg-zh-cn=y
+          CONFIG_PACKAGE_luci-app-firewall=y
+          CONFIG_PACKAGE_luci-i18n-firewall-zh-cn=y
+          CONFIG_PACKAGE_luci-mod-network=y
+          CONFIG_PACKAGE_luci-mod-rpc=y
+          CONFIG_PACKAGE_luci-mod-status=y
+          CONFIG_PACKAGE_luci-mod-system=y
+          CONFIG_PACKAGE_luci-theme-bootstrap=y
+          CONFIG_PACKAGE_luci-app-uhttpd=y
+          CONFIG_PACKAGE_dnsmasq_full=y
+          CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
+          CONFIG_PACKAGE_ipv6helper=y
+          CONFIG_PACKAGE_luci-proto-ipv6=y
+          CONFIG_PACKAGE_qrencode=y
+          CONFIG_PACKAGE_libqrencode=y
+          CONFIG_PACKAGE_block-mount=y
+          CONFIG_PACKAGE_cloudflared=y
           
           EOF
           #
@@ -92,7 +112,7 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       
       - name: up config
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@main
         with:
           name: OpenWrt_config
           path: ./openwrt/.config    
