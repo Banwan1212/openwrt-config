@@ -95,7 +95,7 @@ jobs:
           CONFIG_PACKAGE_qrencode=y
           CONFIG_PACKAGE_libqrencode=y
           CONFIG_PACKAGE_block-mount=y
-          CONFIG_PACKAGE_cloudflared=y
+          # CONFIG_PACKAGE_cloudflared=y
           
           EOF
           #
