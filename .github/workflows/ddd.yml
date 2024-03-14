@@ -44,7 +44,7 @@ jobs:
           cat >> feeds.conf.default <<EOF 
           # src-git kenzo https://github.com/kenzok8/openwrt-packages
           # src-git small https://github.com/kenzok8/small
-           src-git ddd https://github.com/wandduse/openwrt-packages
+          # src-git ddd https://github.com/wandduse/openwrt-packages
           # src-git ddd https://github.com/kiddin9/openwrt-packages
           # src-git kiddin https://github.com/kiddin9/openwrt-packages.git
           EOF
@@ -96,8 +96,7 @@ jobs:
           CONFIG_PACKAGE_luci-proto-ipv6=y
           CONFIG_PACKAGE_qrencode=y
           CONFIG_PACKAGE_libqrencode=y
-          CONFIG_PACKAGE_block-mount=y
-          # CONFIG_PACKAGE_cloudflared=y
+          CONFIG_PACKAGE_block-mount=y          
           CONFIG_PACKAGE_docker=y
           CONFIG_PACKAGE_dockerd=y
           CONFIG_PACKAGE_luci-app-docker=y
@@ -127,48 +126,13 @@ jobs:
           CONFIG_PACKAGE_luci-app-diskman_INCLUDE_kmod_md_raid456=y
           CONFIG_PACKAGE_luci-app-diskman_INCLUDE_kmod_md_linear=y        
 
-          # 流量图形
-          CONFIG_PACKAGE_luci-app-vnstat=y
-          # UPNP
-          CONFIG_PACKAGE_luci-app-upnp=y
-          # 文件助手
-          CONFIG_PACKAGE_luci-app-fileassistant=y
-          # CONFIG_PACKAGE_filebrowser=y
-          CONFIG_PACKAGE_luci-app-filebrowser=y
-          CONFIG_PACKAGE_luci-app-filetransfer=y
-          # ssr
-          CONFIG_PACKAGE_luci-app-ssr-plus=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NaiveProxy=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Server=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Server=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Server=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Simple_Obfs=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_Plugin=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
-          # passwall          
-          # CONFIG_PACKAGE_luci-app-passwall2=y
-
           
           EOF
           #
           # ===============================================================
           # 
           sed -i 's/^[ \t]*//g' ./.config
-          make defconfig
-          
-      - name: Start SSH via tmate
-        uses: rdp-studio/ssh2actions@main
-        if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      
+          make defconfig                
       - name: up config
         uses: actions/upload-artifact@main
         with:
