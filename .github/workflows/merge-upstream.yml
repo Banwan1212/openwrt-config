@@ -11,7 +11,7 @@ on:
     - cron: '0 2 * * *'  # 每天凌晨2点自动编译
 
 env:
-  OPENWRT_REPO: 'https://git.openwrt.org/openwrt/openwrt' # OpenWrt源码仓库
+  OPENWRT_REPO: 'https://github.com/openwrt/openwrt' # OpenWrt源码仓库
   OPENWRT_BRANCH: 'openwrt-23.05' # OpenWrt版本分支
   FEEDS_CONF: 'feeds.conf.default' # feeds配置文件
   CONFIG_FILE: '.config' # 编译配置文件
