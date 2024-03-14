@@ -12,7 +12,7 @@ on:
 
 env:
   OPENWRT_REPO: 'https://github.com/openwrt/openwrt' # OpenWrt源码仓库
-  OPENWRT_BRANCH: 'v23.05.2' # OpenWrt版本分支
+  OPENWRT_BRANCH: 'openwrt-23.05' # OpenWrt版本分支
   FEEDS_CONF: 'feeds.conf.default' # feeds配置文件
   CONFIG_FILE: '.config' # 编译配置文件
 
