@@ -1,57 +1,65 @@
-#
-# This is free software, lisence use MIT.
-# 
-# Copyright (C) 2021 KFERMercer <KFER.Mercer@gmail.com>
-# 
-# <https://github.com/KFERMercer/OpenWrt-CI>
-#
-
-name: Merge-upstream
+name: Build OpenWrt 23.05.2
 
 on:
   push:
     branches:
-      - master
+      - main
+  pull_request:
+    branches:
+      - main
   schedule:
-    - cron: 30 19 * * *
+    - cron: '0 2 * * *'  # 每天凌晨2点自动编译
+
+env:
+  OPENWRT_REPO: 'https://github.com/openwrt/openwrt' # OpenWrt源码仓库
+  OPENWRT_BRANCH: 'v23.05.2' # OpenWrt版本分支
+  FEEDS_CONF: 'feeds.conf.default' # feeds配置文件
+  CONFIG_FILE: '.config' # 编译配置文件
 
 jobs:
-
-  merge:
-
+  build:
     runs-on: ubuntu-latest
 
     steps:
-
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        ref: master
-        fetch-depth: 0
-        lfs: true
-
-    - name: Set git config
-      run : |
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git config --global user.name "github-actions[bot]"
-        git config --global pull.rebase false
-        git config --global --list
-
-    - name: Load upstream commits
-      run: git pull https://github.com/coolsnowwolf/lede.git --log --no-commit
-
-    - name: Apply commit changes
+        repository: ${{ env.OPENWRT_REPO }}
+        ref: ${{ env.OPENWRT_BRANCH }}
+        
+    - name: Checkout custom packages
+      uses: actions/checkout@v2
+      with:
+        repository: kiddin9/openwrt-packages
+        ref: main # 或者你想要的分支
+        path: packages # 存放插件的目录
+  
+    - name: Set up environment
       run: |
-        if [ -f ./.git/MERGE_MSG ]; then
-        mkdir ./tmp && cp ./.git/MERGE_MSG ./tmp/message
-        sed -i "1c [bot] AutoMerging: merge all upstream's changes:" ./tmp/message
-        # sed -i '/^\#.*/d' ./tmp/message
-        git commit --file="./tmp/message"
-        else
-        echo "There is no merge commits."
-        fi
+        sudo apt update
+        sudo apt install -y build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib
 
-    - name: Push Commits
-      env:
-        DOWNSTREAM_BRANCH: master
-      run: git push origin $DOWNSTREAM_BRANCH
+    - name: Install feeds
+      run: |
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a -p packages
+
+    - name: Load custom configuration
+      run: |
+        cp ${{ github.workspace }}/${{ env.CONFIG_FILE }} .config
+
+    - name: Cache build directories
+      uses: actions/cache@v2
+      with:
+        path: |
+          bin
+          build_dir
+          staging_dir
+        key: ${{ runner.os }}-openwrt-${{ hashFiles('**/${{ env.CONFIG_FILE }}') }}
+        restore-keys: |
+          ${{ runner.os }}-openwrt-
+
+    - name: Compile OpenWrt
+      run: |
+        make defconfig
+        make -j$(nproc)
