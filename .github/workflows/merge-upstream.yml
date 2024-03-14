@@ -1,4 +1,4 @@
-name: Build OpenWrt 23.05.2
+name: Build OpenWrt 23.05.2 ai
 
 on:
   push:
