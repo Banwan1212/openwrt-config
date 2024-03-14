@@ -44,7 +44,7 @@ jobs:
           cat >> feeds.conf.default <<EOF 
           # src-git kenzo https://github.com/kenzok8/openwrt-packages
           # src-git small https://github.com/kenzok8/small
-          src-git ddd https://github.com/wandduse/openwrt-packages
+           src-git ddd https://github.com/wandduse/openwrt-packages
           # src-git ddd https://github.com/kiddin9/openwrt-packages
           # src-git kiddin https://github.com/kiddin9/openwrt-packages.git
           EOF
@@ -152,7 +152,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_Plugin=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
           # passwall          
-          CONFIG_PACKAGE_luci-app-passwall2=y
+          # CONFIG_PACKAGE_luci-app-passwall2=y
 
           
           EOF
