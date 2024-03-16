@@ -163,7 +163,8 @@ jobs:
           CONFIG_PACKAGE_filebrowser=y
           CONFIG_PACKAGE_luci-app-filebrowser=y
           CONFIG_PACKAGE_luci-app-filetransfer=y
-
+          # UPNP
+          CONFIG_PACKAGE_luci-app-upnp=y
           
           # ssr
           CONFIG_PACKAGE_luci-app-ssr-plus=y
