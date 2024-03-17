@@ -76,6 +76,7 @@ jobs:
           # src-git ddd https://github.com/wandduse/openwrt-packages
           # src-git ddd https://github.com/kiddin9/openwrt-packages
           src-git mosdns https://github.com/sbwml/luci-app-mosdns
+          src-git cloudflared https://github.com/openwrt/packages/tree/openwrt-22.03/net/cloudflared
           src-git kiddin https://github.com/kiddin9/openwrt-packages
           EOF
           # 静态 to DHCP
@@ -83,8 +84,8 @@ jobs:
            sed -i 's/none/dhcp/g' package/base-files/files/bin/config_generate
           
           ./scripts/feeds update -a && rm -rf feeds/luci/applications/luci-app-mosdns
-          # rm -rf feeds/packages/net/{alist,adguardhome,xray*,v2ray*,v2ray*,sing*,smartdns}
-          rm -rf feeds/kiddin/mosdns
+          rm -rf feeds/packages/net/{cloudflared}
+          rm -rf feeds/kiddin/{mosdns,cloudflared}
           rm -rf feeds/packages/lang/golang
           git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
           ./scripts/feeds install -a 
