@@ -232,7 +232,7 @@ jobs:
           #
           CONFIG_PACKAGE_luci-app-zerotier=y
           CONFIG_PACKAGE_ffmpeg=y
-          CONFIG_PACKAGE_cloudflared=y
+          # CONFIG_PACKAGE_cloudflared=y
           # 证书ssl
           CONFIG_PACKAGE_luci-app-acme=y
           # 流量图形
