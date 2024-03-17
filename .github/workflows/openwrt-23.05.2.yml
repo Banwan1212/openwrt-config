@@ -97,7 +97,7 @@ jobs:
       - name: Generate configuration file
         run: |
           cd openwrt
-          svn export https://github.com/kiddin9/openwrt-packages/trunk/mosdns package/mosdns
+          svn export https://github.com/kiddin9/openwrt-packages/trunk/mosdns kiddin/mosdns
           rm -f ./.config*
           rm -rf ./tmp && rm -rf .config
           touch ./.config          
