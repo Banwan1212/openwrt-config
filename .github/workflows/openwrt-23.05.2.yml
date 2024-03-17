@@ -89,12 +89,18 @@ jobs:
           # 静态 to DHCP
            sed -i 's/-static/-dhcp/g' package/base-files/files/lib/functions/uci-defaults.sh
            sed -i 's/none/dhcp/g' package/base-files/files/bin/config_generate
+           
+          # 更新插件
+          ./scripts/feeds update -a
           
-          ./scripts/feeds update -a && rm -rf feeds/luci/applications/luci-app-mosdns
+          # 删除不用的插件
+          rm -rf feeds/luci/applications/luci-app-mosdns
           rm -rf feeds/packages/net/{cloudflared}
           rm -rf feeds/kiddin/{mosdns,cloudflared}
           rm -rf feeds/packages/lang/golang
           git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+                     
+          # 安装插件
           ./scripts/feeds install -a 
           
           # sed -i 's/Authorization Required/wanuse.com/g' feeds/luci/modules/luci-base/ucode/template/sysauth.ut
