@@ -72,15 +72,14 @@ jobs:
           cd openwrt
           cat >> feeds.conf.default <<EOF 
           # src-git kenzo https://github.com/kenzok8/openwrt-packages
-          # src-git small https://github.com/kenzok8/small
-          # src-git ddd https://github.com/wandduse/openwrt-packages
-          # src-git ddd https://github.com/kiddin9/openwrt-packages
-          
+          # src-git small https://github.com/kenzok8/small          
+                    
           # 手动添加mosdn后面手动删除原来的
           src-git mosdns https://github.com/sbwml/luci-app-mosdns
           
           # 手动添加cloudflared后面手动删除原来的
           src-git cloudflared https://github.com/openwrt/packages/tree/openwrt-22.03/net/cloudflared
+          
           # 自定义插件
           src-git kiddin https://github.com/kiddin9/openwrt-packages
           
@@ -98,6 +97,8 @@ jobs:
           rm -rf feeds/packages/net/{cloudflared}
           rm -rf feeds/kiddin/{mosdns,cloudflared}
           rm -rf feeds/packages/lang/golang
+          
+          # 手动下载插件
           git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
                      
           # 安装插件
@@ -106,9 +107,7 @@ jobs:
           # sed -i 's/Authorization Required/wanuse.com/g' feeds/luci/modules/luci-base/ucode/template/sysauth.ut
           sed -i 's/Authorization Required/openwrt v23.05.2 wanuse.com/g' feeds/luci/themes/luci-theme-bootstrap/htdocs/luci-static/resources/view/bootstrap/sysauth.js
           sed -i 's/需要授权/openwrt v23.05.2 wanuse.com/g' feeds/luci/modules/luci-base/po/zh_Hans/base.po
-          
-          
-     
+                 
       - name: Generate configuration file
         run: |
           cd openwrt
