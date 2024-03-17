@@ -75,6 +75,7 @@ jobs:
           # src-git small https://github.com/kenzok8/small
           # src-git ddd https://github.com/wandduse/openwrt-packages
           # src-git ddd https://github.com/kiddin9/openwrt-packages
+          src-git mosdns https://github.com/sbwml/luci-app-mosdns
           src-git kiddin https://github.com/kiddin9/openwrt-packages
           EOF
           # 静态 to DHCP
@@ -96,7 +97,7 @@ jobs:
       - name: Generate configuration file
         run: |
           cd openwrt
-          
+          svn export https://github.com/kiddin9/openwrt-packages/trunk/mosdns package/mosdns
           rm -f ./.config*
           rm -rf ./tmp && rm -rf .config
           touch ./.config          
