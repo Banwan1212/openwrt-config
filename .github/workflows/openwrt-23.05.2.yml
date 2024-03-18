@@ -106,7 +106,7 @@ jobs:
           
           # 手动下载插件
           git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
-
+          # git clone https://github.com/kiddin9/openwrt-packages/tree/master/cloudflared feeds/packages/net/cloudflared
       - name: install 安装插件
         run: |
           cd openwrt
