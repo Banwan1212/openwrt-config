@@ -89,7 +89,10 @@ jobs:
            
           # 更新插件
           ./scripts/feeds update -a
-          
+                               
+          # 安装插件
+          ./scripts/feeds install -a 
+
           # 删除不用的插件
           rm -rf feeds/luci/applications/luci-app-mosdns
           # rm -rf feeds/packages/net/cloudflared
@@ -100,9 +103,6 @@ jobs:
           
           # 手动下载插件
           git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
-                     
-          # 安装插件
-          ./scripts/feeds install -a 
           
           # 修改cloudflared
           sed -i 's/2024.2.1/2023.10.0/g' feeds/packages/net/cloudflared/Makefile
