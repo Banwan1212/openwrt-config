@@ -89,12 +89,11 @@ jobs:
 
           # 编译5.10内核
           #  sed -i 's/KERNEL_PATCHVER:=5.15/KERNEL_PATCHVER:=6.1/g' ./target/linux/x86/Makefile
-           
+      - name: Update 更新插件
+        run: |
+          cd openwrt
           # 更新插件
           ./scripts/feeds update -a
-                               
-          # 安装插件
-          ./scripts/feeds install -a 
 
           # 删除不用的插件
           rm -rf feeds/luci/applications/luci-app-mosdns
@@ -105,16 +104,15 @@ jobs:
           rm -rf feeds/packages/lang/golang
           
           # 手动下载插件
-          git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
-          
-          # 修改cloudflared
-          sed -i 's/2024.2.1/2023.10.0/g' feeds/packages/net/cloudflared/Makefile
-          sed -i 's/c4a741ee532b8544a65a598e739e002ec04cfffb202119e3e2315e9ecc7dc07a/2d2df4dd4992eef485f7ffebc0a1e9e6292b42ca42341f2e46224f17155e9532/g' feeds/packages/net/cloudflared/Makefile
-          sed -i '/init.d/d' feeds/packages/net/cloudflared/Makefile
-          sed -i '/cloudflared.config $(1)/d' feeds/packages/net/cloudflared/Makefile
-          rm -rf feeds/packages/net/cloudflared/files/cloudflared.init
-          rm -rf feeds/packages/net/cloudflared/files/cloudflared.config
-          
+          # git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+
+      - name: install 安装插件
+        run: |
+          cd openwrt
+                               
+          # 安装插件
+          ./scripts/feeds install -a          
+
           # sed -i 's/Authorization Required/wanuse.com/g' feeds/luci/modules/luci-base/ucode/template/sysauth.ut
           sed -i 's/Authorization Required/openwrt v23.05.2 wanuse.com/g' feeds/luci/themes/luci-theme-bootstrap/htdocs/luci-static/resources/view/bootstrap/sysauth.js
           sed -i 's/需要授权/openwrt v23.05.2 wanuse.com/g' feeds/luci/modules/luci-base/po/zh_Hans/base.po
