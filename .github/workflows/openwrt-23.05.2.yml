@@ -70,13 +70,13 @@ jobs:
       - name: Update feeds
         run: |
           cd openwrt
+          
           cat >> feeds.conf.default <<EOF 
           # src-git kenzo https://github.com/kenzok8/openwrt-packages
           # src-git small https://github.com/kenzok8/small          
                     
           # 手动添加mosdn后面手动删除原来的
-          src-git mosdns https://github.com/sbwml/luci-app-mosdns
-          
+          src-git mosdns https://github.com/sbwml/luci-app-mosdns          
           
           # 自定义插件
           src-git kiddin https://github.com/kiddin9/openwrt-packages
@@ -86,6 +86,9 @@ jobs:
           # 静态 to DHCP
            sed -i 's/-static/-dhcp/g' package/base-files/files/lib/functions/uci-defaults.sh
            sed -i 's/none/dhcp/g' package/base-files/files/bin/config_generate
+
+          # 编译5.10内核
+          #  sed -i 's/PATCHVER:=5.4/PATCHVER:=5.10/' openwrt/target/linux/ramips/Makefile
            
           # 更新插件
           ./scripts/feeds update -a
