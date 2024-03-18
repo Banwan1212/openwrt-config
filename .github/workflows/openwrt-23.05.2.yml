@@ -89,6 +89,7 @@ jobs:
 
           # 编译5.10内核
           #  sed -i 's/KERNEL_PATCHVER:=5.15/KERNEL_PATCHVER:=6.1/g' ./target/linux/x86/Makefile
+          
       - name: Update 更新插件
         run: |
           cd openwrt
@@ -101,7 +102,7 @@ jobs:
           
           # rm -rf feeds/kiddin/cloudflared
           rm -rf feeds/kiddin/mosdns
-          rm -rf feeds/packages/lang/golang
+          # rm -rf feeds/packages/lang/golang
           
           # 手动下载插件
           # git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
