@@ -105,8 +105,8 @@ jobs:
           rm -rf feeds/packages/lang/golang
           
           # 手动下载插件
-          git clone https://github.com/Banwan1212/golang feeds/packages/lang/golang
-           
+          # git clone https://github.com/Banwan1212/golang feeds/packages/lang/golang
+          git clone https://github.com/kenzok8/golang -b 1.21 feeds/packages/lang/golang 
       - name: install 安装插件
         run: |
           cd openwrt
