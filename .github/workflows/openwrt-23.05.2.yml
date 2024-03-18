@@ -102,10 +102,10 @@ jobs:
           
           # rm -rf feeds/kiddin/cloudflared
           rm -rf feeds/kiddin/mosdns
-          # rm -rf feeds/packages/lang/golang
+          rm -rf feeds/packages/lang/golang
           
           # 手动下载插件
-          # git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+          git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 
       - name: install 安装插件
         run: |
