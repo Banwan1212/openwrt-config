@@ -98,15 +98,15 @@ jobs:
 
           # 删除不用的插件
           rm -rf feeds/luci/applications/luci-app-mosdns
-          rm -rf feeds/packages/net/cloudflared
+          # rm -rf feeds/packages/net/cloudflared
           
           # rm -rf feeds/kiddin/cloudflared
           rm -rf feeds/kiddin/mosdns
           rm -rf feeds/packages/lang/golang
           
           # 手动下载插件
-          git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
-          git clone https://github.com/kiddin9/openwrt-packages/tree/master/cloudflared feeds/packages/net/cloudflared
+          # git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+           git clone https://github.com/openwrt/packages/tree/openwrt-22.03/lang/golang feeds/packages/lang/golang
       - name: install 安装插件
         run: |
           cd openwrt
