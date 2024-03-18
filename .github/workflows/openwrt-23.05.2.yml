@@ -77,8 +77,6 @@ jobs:
           # 手动添加mosdn后面手动删除原来的
           src-git mosdns https://github.com/sbwml/luci-app-mosdns
           
-          # 手动添加cloudflared后面手动删除原来的
-          # src-git cloudflared https://github.com/openwrt/packages/tree/openwrt-22.03/net/cloudflared
           
           # 自定义插件
           src-git kiddin https://github.com/kiddin9/openwrt-packages
@@ -94,8 +92,9 @@ jobs:
           
           # 删除不用的插件
           rm -rf feeds/luci/applications/luci-app-mosdns
-          rm -rf feeds/packages/net/cloudflared
-          rm -rf feeds/packages/cloudflared
+          # rm -rf feeds/packages/net/cloudflared
+          
+          rm -rf feeds/kiddin/cloudflared
           rm -rf feeds/kiddin/mosdns
           rm -rf feeds/packages/lang/golang
           
@@ -104,6 +103,14 @@ jobs:
                      
           # 安装插件
           ./scripts/feeds install -a 
+          
+          # 修改cloudflared
+          sed -i 's/2023.2.2/2023.10.0/g' feeds/packages/net/cloudflared/Makefile
+          sed -i 's/b0abaff125d29c517894f6ea74dcc7044c92500670463595ba9ff4950a1d2fc2/2d2df4dd4992eef485f7ffebc0a1e9e6292b42ca42341f2e46224f17155e9532/g' openwrt/feeds/packages/net/cloudflared/Makefile
+          sed -i '/init.d/d' feeds/packages/net/cloudflared/Makefile
+          sed -i '/cloudflared.config $(1)/d' feeds/packages/net/cloudflared/Makefile
+          rm -rf feeds/packages/net/cloudflared/files/cloudflared.init
+          rm -rf feeds/packages/net/cloudflared/files/cloudflared.config
           
           # sed -i 's/Authorization Required/wanuse.com/g' feeds/luci/modules/luci-base/ucode/template/sysauth.ut
           sed -i 's/Authorization Required/openwrt v23.05.2 wanuse.com/g' feeds/luci/themes/luci-theme-bootstrap/htdocs/luci-static/resources/view/bootstrap/sysauth.js
