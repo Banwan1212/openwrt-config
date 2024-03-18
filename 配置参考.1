@@ -49,7 +49,7 @@ jobs:
           echo "src-git helloworld https://github.com/kjrzxu/helloworld.git" >> ./feeds.conf.default
           echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git" >> ./feeds.conf.default
       - name: 编译5.10内核
-        run: sed -i 's/PATCHVER:=5.4/PATCHVER:=6.10/' openwrt/target/linux/ramips/Makefile
+        run: sed -i 's/PATCHVER:=5.4/PATCHVER:=6.10/' openwrt/target/linux/x86/Makefile
       - name: 升级feeds
         run: cd openwrt && ./scripts/feeds update -a
       - name: 安装feeds
