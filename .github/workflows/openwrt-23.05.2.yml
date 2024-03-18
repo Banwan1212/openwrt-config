@@ -88,7 +88,7 @@ jobs:
            sed -i 's/none/dhcp/g' package/base-files/files/bin/config_generate
 
           # 编译5.10内核
-          #  sed -i 's/PATCHVER:=5.4/PATCHVER:=5.10/' target/linux/x86/Makefile
+          #  sed -i 's/KERNEL_PATCHVER:=5.15/KERNEL_PATCHVER:=6.1/g' ./target/linux/x86/Makefile
            
           # 更新插件
           ./scripts/feeds update -a
