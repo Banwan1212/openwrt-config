@@ -67,7 +67,7 @@ jobs:
          # wget https://github.com/openwrt/openwrt/archive/refs/tags/v23.05.2.zip
          # unzip v23.05.2.zip
          # mv openwrt-23.05.2 openwrt
-         git clone git://git.openwrt.org/openwrt.git
+         git clone https://github.com/openwrt/openwrt/
       - name: 添加插件源
         run: |
           cd openwrt
