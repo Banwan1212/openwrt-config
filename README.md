@@ -1,3 +1,6 @@
+# 个人博客地址：www.wanuse.com
+
+
 下载源代码，更新 feeds 并选择配置
 
 git clone https://github.com/openwrt/openwrt \
