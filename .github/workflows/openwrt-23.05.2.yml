@@ -249,12 +249,7 @@ jobs:
           # 
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig                
-      - name: up config
-        uses: actions/upload-artifact@main
-        with:
-          name: OpenWrt_config
-          path: ./openwrt/.config    
-      
+          
       - name: Make download
         run: |
           cd openwrt
